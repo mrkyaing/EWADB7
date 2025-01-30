@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Entry Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="date"],
+        .form-container select,
+        .form-container input[type="tel"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container input[type="submit"],
+        .form-container input[type="button"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .form-container input[type="button"] {
+            background-color: #f44336;
+            color: white;
+        }
+        .form-container input.btn-success{
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+    <script src="js/registration.js"></script>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Student Entry</h2>
+    <form>
+        <label for="studentCode">Student Code</label>
+        <input type="text" id="studentCode" name="studentCode">
+
+        <label for="studentName">Name</label>
+        <input type="text" id="studentName" name="studentName">
+
+        <label for="studentEmail">Email</label>
+        <input type="email" id="studentEmail" name="studentEmail">
+
+        <label for="dob">Date Of Birth</label>
+        <input type="date" id="dob" name="dob">
+
+        <label for="studentPhone">Phone</label>
+        <input type="tel" id="studentPhone" name="studentPhone">
+
+        <label for="studentNRC">National Registration Card</label>
+        <input type="text" id="studentNRC" name="studentNRC">
+
+        <label for="fatherName">Father Name</label>
+        <input type="text" id="fatherName" name="fatherName">
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address">
+
+        <label for="batchName">Batch Name</label>
+       <select id="batchName" name="batchName">
+            <option value="1">Batch 1</option>
+            <option value="2">Batch 2</option>
+            <option value="3">Batch 3</option>
+            <option value="4">Batch 4</option>
+        <input type="button" class="btn-success" value="Entry" onclick="entryProcess();">
+        <input type="button" value="Cancel">
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+h1 {
+    color: red;
+}
+
+#myP {
+    color: brown;
+}
+
+.me-ok {
+    color: green;
+}
+
+i,
+div {
+    text-align: center;
+}
+
+ul li{
+    list-style: square;
+}
+ul li.me{
+    list-style: circle;
+}
