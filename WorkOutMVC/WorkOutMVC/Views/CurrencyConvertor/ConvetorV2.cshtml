@@ -1,0 +1,66 @@
+﻿<head>
+   <script type="text/javascript">
+        function fillData() {
+             if("@ViewBag.SelectedCurrency" != ""){
+                 document.getElementById("ddlFromCurrency").value="@ViewBag.SelectedCurrency";
+             }
+              if("@ViewBag.inputAmount">0){
+                 document.getElementById("txtInputAmount").value="@ViewBag.inputAmount";
+             }
+         }
+         function CheckData(){
+            var selectedCurrency= document.getElementById("ddlFromCurrency").value  ;
+            if(selectedCurrency==""){
+                alert("Please select currency");
+                document.getElementById("txtInputAmount").value = document.getElementById("txtConvertedAmount")="";
+                return false;
+            }
+         }
+   </script>
+</head>
+<body onload="fillData()">
+    <center>
+        <h1>Convert Currency to MMK (Version 2)</h1>
+        <form action="/currencyconvertor/convetorV2" method="post">
+            <table>
+                <tr>
+                    <td>
+                        Choose Currency:
+                    </td>
+                    <td>
+                        <select name="fromCurrency" id="ddlFromCurrency">
+                            <option value="">[SELECT ONE]</option>
+                            <option value="USD">USD</option>
+                            <option value="THB">THB</option>
+                            <option value="SDG">SDG</option>
+                            <option value="MYR">MYR</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Amount:
+                    </td>
+                    <td>
+                        <input type="number" name="inputAmount" id="txtInputAmount"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Result : (MMK)
+                    </td>
+                    <td>
+                        <input type="text" id="txtConvertedAmount" readonly value="@ViewBag.CalculatedAmount" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" value="Convert" onclick="CheckData()" />
+                        <input type="reset" value="Reset" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</body>

@@ -1,0 +1,43 @@
+﻿<center>
+    <h1>Convert Currency to MMK (Version 1)</h1>
+    <form action="/currencyconvertor/convetorV1" method="post">
+        <table>
+            <tr>
+                <td>
+                    Choose Currency:
+                </td>
+                <td>
+                    <select name="fromCurrency">
+                        <option value="USD">USD</option>
+                        <option value="THB">THB</option>
+                        <option value="SDG">SDG</option>
+                        <option value="MYR">MYR</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Amount:
+                </td>
+                <td>
+                    <input type="number" name="inputAmount" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Result : (MMK)
+                </td>
+                <td>
+                    <input type="text" id="txtConvertedAmount" readonly value="@ViewBag.CalculatedAmount" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Convert" />
+                    <input type="reset" value="Reset" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</center>
