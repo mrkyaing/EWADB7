@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 250px;
+            margin: 50px auto;
+            padding: 10px;
+            border: 1px solid #000;
+            display: inline-block;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input[type="text"] {
+            width: 120px;
+            padding: 3px;
+            border: 1px solid #000;
+        }
+
+        .submit-btn {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <form action="/employee/entry" method="post">
+            <label for="empId">Employee ID :</label>
+            <input type="text" name="Id"><br><br>
+
+            <label for="firstName">First Name :</label>
+            <input type="text"  name="FirstName"><br><br>
+
+            <label for="lastName">Last Name :</label>
+            <input type="text" name="LastName"><br><br>
+
+            <label for="lastName">City :</label>
+            <input type="text" name="HomeAddress.City"><br><br>
+
+            <label for="lastName">Street :</label>
+            <input type="text" name="HomeAddress.Street"><br><br>
+
+            <label for="lastName">ZipCode :</label>
+            <input type="text" name="HomeAddress.ZipCode"><br><br>
+
+
+            <input type="submit" value="Submit" class="submit-btn">
+        </form>
+    </div>
+
+</body>
+</html>
