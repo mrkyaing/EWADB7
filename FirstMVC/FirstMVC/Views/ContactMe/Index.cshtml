@@ -1,0 +1,18 @@
+﻿<link href="~/css/mystyle.css" rel="stylesheet" />
+<body>
+    <p>I am a developer.</p>
+    <div>
+        I am learning on .NET .
+    </div>
+    <div>
+        Today,I am learning for MVC Pattern in .NET Core .
+    </div>
+    @ViewBag.Msg
+    @for(int i=1;i<=3;i++){
+        <h1>@i</h1><hr />
+    }
+    <form action="/contactme/search" method="get">
+        Search in Google <input type="text" name="query"/>
+        <input type="submit" value="Search........."/>
+    </form>
+</body>
