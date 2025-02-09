@@ -1,0 +1,21 @@
+h1 {
+  text-align: center;
+}
+#myName {
+  text-align: left;
+}
+.it-me {
+  font-weight: bold;
+}
+.fruitColor {
+  color: red;
+}
+ul li.b {
+  color: green;
+}
+ul li.o {
+  color: yellow;
+}
+body {
+  background-color: #0affff;
+}
