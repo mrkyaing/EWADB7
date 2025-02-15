@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+header {
+  text-align: center;
+  background-color: cyan;
+  padding: 10px;
+}
+nav {
+  float: left;
+  width: 10%;
+  padding: 10px;
+  background-color: cyan;
+  height: 450px;
+  padding-left: 0;
+}
+ul li {
+  list-style: none;
+  text-align: left;
+}
+article {
+  float: right;
+  width: 90%;
+  padding: 10px;
+}
+footer {
+  text-align: center;
+  background-color: cyan;
+  padding: 10px;
+}

@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter To MMK version 2 </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        h2,span {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function fillUserInput(){
+         const selectedElement=  document.getElementById("selectedCurrency");
+        if("@ViewBag.SelectedCurrency" != "x" ){
+          selectedElement.value="@ViewBag.selectedCurrency";
+        }else {
+            selectedElement.selectedIndex=0;
+        }
+        if("@ViewBag.InputedAmount" != "0"){
+            document.getElementById("inputAmount").value="@ViewBag.InputedAmount";
+        }
+        }
+    </script>
+</head>
+<body onload="fillUserInput()">
+    <form action="/currencyconvertor/CurrencyConvertorV2" method="post">
+        <div class="container">
+            <h2>Currency Converter To MMK V2</h2>
+            <span style="color:red">@ViewData["Error"]</span>
+            <label for="currency">Choose Currency :</label>
+            <select name="selectedCurrency" id="selectedCurrency">
+                <option value="x">Select Currency</option>
+                <option value="usd">USD</option>
+                <option value="eur">EUR</option>
+                <option value="sgd">SGD</option>
+            </select>
+            <label for="amount">Amount :</label>
+            <input type="number" name="inputAmount" min="1" step="any" id="inputAmount">
+            <label for="result">Result (MMK) :</label>
+            <input type="text" value="@ViewData["result"]" readonly>
+            <button type="submit">Convert</button>
+        </div>
+    </form>
+</body>
+</html>

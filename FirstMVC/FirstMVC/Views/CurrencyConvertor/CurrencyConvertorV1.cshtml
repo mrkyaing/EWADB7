@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter To MMK Version 1 </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: left;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form action="/currencyconvertor/CurrencyConvertorV1" method="post">
+        <div class="container">
+            <h2>Currency Converter To MMK v1</h2>
+            <label for="currency">Choose Currency :</label>
+            <select name="selectedCurrency">
+                <option>Select Currency</option>
+                <option value="usd">USD</option>
+                <option value="eur">EUR</option>
+                <option value="sgd">SGD</option>
+            </select>
+            <label for="amount">Amount :</label>
+            <input type="number" name="inputAmount" min="1" step="any">
+            <label for="result">Result (MMK) :</label>
+            <input type="text" value="@ViewData["result"]" readonly>
+            <button type="submit">Convert</button>
+        </div>
+    </form>
+</body>
+</html>
