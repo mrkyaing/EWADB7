@@ -18,5 +18,17 @@ namespace FirstMVC.Controllers {
         public IActionResult Dashboard() {
             return View();
         }
+        [HttpGet]
+        public string TellMeNow() {
+            return DateTime.Now.ToString();
+        }
+        public string FindFriends(string friend) {
+            string foundFriend = "no friend";
+            string[] myFriends = { "SU SU", "AYE AYE", "MIN MIN" };
+            foreach (var f in myFriends) {
+                foundFriend = f.Equals(friend.ToUpper()) ? f : foundFriend;
+            }
+            return foundFriend;
+        }
     }
 }

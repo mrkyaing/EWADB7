@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>myself</title>
     <link rel="stylesheet" href="/css/myStyle.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header><a href="index.html">MySelf</a></header>
@@ -19,15 +24,28 @@
       <article>
         <div>
           <h3>Hello,I am MG . Nice to see you!!</h3>
+          <button id="btnShowProfile">show profile</button>
+          <button id="btnHideProfile">hide profile</button>
+        </div>
+        <div>
           <img
             src="images/MGKYAING.jpg"
             alt="there is no image."
             width="250px"
             height="250px"
+            id="myProfile"
           />
         </div>
       </article>
     </section>
     <footer>Copyright by &copy; MG -2025</footer>
   </body>
+  <script>
+    $("#btnShowProfile").on("click", function () {
+      $("#myProfile").show(2000);
+    });
+    $("#btnHideProfile").on("click", function () {
+      $("#myProfile").hide(2000);
+    });
+  </script>
 </html>
