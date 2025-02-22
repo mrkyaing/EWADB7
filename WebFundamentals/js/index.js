@@ -1,17 +1,20 @@
-function sayHi(){
-    document.getElementById('myP').innerHTML = 'Hi, I am changed.';
+function sayHi() {
+  document.getElementById("myP").innerHTML = "Hi, I am changed.";
 }
 var Vehicle = function (make, model, year) {
-    this.make = make;
-    this.model = model;
-    this.year = year;
+  this.make = make;
+  this.model = model;
+  this.year = year;
 };
 Vehicle.prototype.start = function () {
-    console.log('Starting...');
+  console.log("Starting...");
 };
 Vehicle.prototype.toString = function () {
-    return this.make + ' ' + this.model + ' (' + this.year + ')';
+  return this.make + " " + this.model + " (" + this.year + ")";
 };
-var vehicle = new Vehicle('Toyota', 'Camry', 2017);
+Vehicle.prototype.stop = function () {
+  console.log("Stopping...");
+};
+var vehicle = new Vehicle("Toyota", "Camry", 2017);
 vehicle.start();
 console.log(vehicle);
