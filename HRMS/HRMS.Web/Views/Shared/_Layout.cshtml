@@ -36,10 +36,15 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="/position/entry" class="nav-link text-dark">position Entry</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               Positon
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/position/entry">Entry</a></li>
+                                <li><a class="dropdown-item" href="/position/list">List</a></li>
+                            </ul>
                         </li>
-                       
                     </ul>
 
                 </div>

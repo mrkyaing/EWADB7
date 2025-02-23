@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 var config = builder.Configuration;
 //register the DbContext to connect to the database
 builder.Services.AddDbContext<HRMSWebDbContext>(o => o.UseSqlServer(config.GetConnectionString("HRMSDB")));
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {
