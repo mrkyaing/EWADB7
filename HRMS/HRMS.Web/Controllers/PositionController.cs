@@ -13,7 +13,6 @@ namespace HRMS.Web.Controllers {
             _db = db;
         }
 
-
         [HttpGet]
         public IActionResult Entry() {
             return View();

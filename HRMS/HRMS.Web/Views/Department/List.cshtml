@@ -1,0 +1,37 @@
+﻿@model IList<DepartmentViewModel>
+
+<h1>Department List Information</h1>
+@if (TempData["Msg"] != null && !(Convert.ToBoolean(TempData["IsErrorOccur"])))
+{
+    <div class="alert alert-success" role="alert">
+        <span>@TempData["Msg"]</span>
+    </div>
+}
+else @if (TempData["Msg"] != null && (Convert.ToBoolean(TempData["IsErrorOccur"])))
+{
+    <div class="alert alert-danger" role="alert">
+        <span>@TempData["Msg"]</span>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Code</th>
+            <th scope="col">Description</th>
+            <th scope="col">Extension Phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@(Model.IndexOf(item) + 1)</th>
+                <td>@item.Code</td>
+                <td>@item.Description</td>
+                <td>@item.ExtensionPhone</td>
+            </tr>
+        }
+    </tbody>
+</table>
