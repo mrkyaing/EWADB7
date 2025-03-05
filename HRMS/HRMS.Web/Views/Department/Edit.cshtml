@@ -1,37 +1,42 @@
-﻿@model PositionViewModel
+﻿@model DepartmentViewModel
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<h3>Position Edit Form</h3>
-<form action="/position/update" method="post">
+
+<h3>Department Edit Form</h3>
+
+<form action="/Department/Update" method="post">
     <div class="mb-3">
-        <!--for update process-->
-        <input type="hidden" name="Id" value="@Model.Id">
+
+        <input type="hidden" name="Id" value="@Model.Id"/>
+
         <label for="code" class="form-label">Code</label>
-        <input type="text" class="form-control" name="Code" id="txtCode" placeholder="type position code in here" required value="@Model.Code" readonly>
+        <input type="text" class="form-control" name="code" id="txtCode" placeholder="type department code in here" value="@Model.Code">
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <input type="text" class="form-control" name="Description" id="txtDescription" placeholder="type position description in here" required value="@Model.Description">
+        <input type="text" class="form-control" name="description" id="txtDesc" placeholder="type department description in here" value="@Model.Description">
     </div>
     <div class="mb-3">
-        <label for="level" class="form-label">Level</label>
-        <input type="number" class="form-control" name="Level" id="txtLevel" placeholder="type level in here" value="@Model.Level">
+        <label for="ExtensionPhone" class="form-label">ExtensionPhone</label>
+        <input type="text" class="form-control" name="ExtensionPhone" placeholder="type department ExtensionPhone in here" value="@Model.ExtensionPhone">
     </div>
-    <button type="submit" class="btn btn-success" id="btnUpdate" disabled>Update</button>
+    <button type="submit" class="btn btn-success" id="btnEntry">Entry</button>
     <button type="reset" class="btn btn-primary">Cancel</button>
 </form>
+
 <script>
     $(document).ready(function () {
-        //initially disable the entry button
-         $('#btnUpdate').attr('disabled', true);
+        
         //function defination
         function toggleEntryButton() {
-            if ($('#txtLevel').val().length != 0 && $('#txtDescription').val().length != 0) {
-                $('#btnUpdate').attr('disabled', false);
+            if ($('#txtCode').val().length != 0 && $('#txtDesc').val().length != 0) {
+                $('#btnEntry').attr('disabled', false);
             } else {
-                $('#btnUpdate').attr('disabled', true);
+                $('#btnEntry').attr('disabled', true);
             }
         }
-        $('#txtLevel,#txtDescription').keyup(function () {
+
+        $('#txtCode, #txtDesc').keyup(function () {
             toggleEntryButton();
         });
     });

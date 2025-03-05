@@ -49,6 +49,7 @@ namespace HRMS.Web.Controllers {
 
         public IActionResult List() {
             IList<DepartmentViewModel> deptVM = _db.Departments.Where(w => w.IsActive).Select(s => new DepartmentViewModel {
+                Id=s.Id,
                 Code = s.Code,
                 Description = s.Description,
                 ExtensionPhone = s.ExtensionPhone
@@ -56,6 +57,70 @@ namespace HRMS.Web.Controllers {
 
 
             return View(deptVM);
+        }
+        public IActionResult Edit(string id)
+        {
+            DepartmentViewModel deptVM = _db.Departments.Where(w => w.IsActive && w.Id == id).Select(s => new DepartmentViewModel
+            {
+                Id=s.Id,
+                Code=s.Code,
+                Description=s.Description,
+                ExtensionPhone=s.ExtensionPhone
+            }).FirstOrDefault();
+
+            return View(deptVM);
+        }
+        public async Task<IActionResult> Update(DepartmentViewModel deptVM) 
+        {
+            try
+            {
+                DepartmentEntity deptEntity = _db.Departments.Where(w => w.IsActive && w.Id == deptVM.Id).FirstOrDefault();
+
+                if (deptEntity is not null)
+                {
+                    deptEntity.Code = deptVM.Code;
+                    deptEntity.Description = deptVM.Description;
+                    deptEntity.ExtensionPhone = deptVM.ExtensionPhone;
+                    deptEntity.UpdatedBy = "system";
+                    deptEntity.UpdatedAt = DateTime.Now;
+                    deptEntity.Ip = await NetworkHelper.GetIpAddressAsnyc();
+
+                    _db.Departments.Update(deptEntity);
+                    _db.SaveChanges();
+
+                    TempData["Msg"] = "Data has been updated successfully";
+                    TempData["IsErrorOccur"] = false;
+                }
+            }
+            catch (Exception e)
+            {
+                TempData["Msg"] = "Oh,Sorry error was occured when recrod is updated time.";
+                TempData["IsErrorOccur"] = true;
+            }
+
+            return RedirectToAction("List");
+        }
+        public IActionResult Delete(string id)
+        {
+            try
+            {
+                DepartmentEntity deptEntity = _db.Departments.Where(w => w.IsActive && w.Id == id).FirstOrDefault();
+
+                if (deptEntity is not null)
+                {
+                    deptEntity.IsActive = false;
+                    _db.SaveChanges();
+
+                    TempData["Msg"] = "Data has been deleted successfully";
+                    TempData["IsErrorOccur"] = false;
+                }
+            }
+            catch (Exception e)
+            {
+                TempData["Msg"] = "Oh,Sorry error was occured when recrod is deleted time.";
+                TempData["IsErrorOccur"] = true;
+            }
+            return RedirectToAction("List");
         }
     }
 }

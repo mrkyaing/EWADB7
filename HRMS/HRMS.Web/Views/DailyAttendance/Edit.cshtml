@@ -1,0 +1,83 @@
+﻿@model DailyAttendanceViewModel
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<h3> DailyAttendance Edit Form</h3>
+<form action="/DailyAttendance/update" method="post">
+    <div class="mb-3">
+
+        <input type="hidden" name="Id" value="@Model.Id">   <!--for update process-->
+
+        <label for="AttendanceDate" class="form-label">Attendance Date</label>
+        <input type="date" class="form-control" id="txtAttDate" name="AttendanceDate" placeholder="type Attendance Date in here" value="@Model.AttendanceDate.ToString("yyyy-MM-dd")" required max="@DateTime.Now.ToString("yyyy-MM-dd")">
+    </div>
+
+    <div class="mb-3">
+        <label for="InTime" class="form-label">In Time</label>
+        <input type="time" class="form-control" id="txtInTime" name="InTime" placeholder="type In Time in here" value="@Model.InTime" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="OutTime" class="form-label">Out Time</label>
+        <input type="time" class="form-control" id="txtOutTime" name="OutTime" placeholder="type Out Time in here" value="@Model.OutTime" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="EmployeeId" class="form-label">Employee</label>
+        <select class="form-select" id="txtEmpeId" name="EmployeeId">
+            <option value="x" selected>[Select One]</option>
+            @foreach (var employee in Model.EmployeeViewModels)
+            {
+                <option value="@employee.Code">@employee.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="DepartmentId" class="form-label">Department</label>
+        <select class="form-select" id="txtDeptId" name="DepartmentId">
+            <option value="x" selected>[select one]</option>
+            @foreach (var department in Model.DepartmentViewModels)
+            {
+                <option value="@department.Code">@department.Description</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success" id="btnEntry">Entry</button>
+    <button type="reset" class="btn btn-primary">Cancel</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+
+        const employeeId = document.getElementById("txtEmpeId");
+        if ("@Model.EmployeeId" != "x") {
+            employeeId.value = "@Model.EmployeeId";
+        } else {
+            employeeId.selectedIndex = 0;
+        }
+
+        const departmentId = document.getElementById("txtDeptId");
+        if ("@Model.DepartmentId" != "x") {
+            departmentId.value = "@Model.DepartmentId";
+        } else {
+            departmentId.selectedIndex = 0;
+        }
+        
+        //-------------------------------
+        function toggleEntryButton() {
+            if ($('#txtAttDate').val().length != 0 && $('#txtInTime').val().length != 0 && $('#txtOutTime').val().length != 0) {
+                $('#btnEntry').attr('disabled', false);
+            }
+            else {
+                $('#btnEntry').attr('disabled', true);
+            }
+        }
+
+        $('#txtAttDate,#txtInTime,#txtOutTime').on('change', function () {
+            toggleEntryButton();
+        });
+    });
+
+</script>

@@ -1,0 +1,66 @@
+﻿@model DailyAttendanceViewModel
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<h3> DailyAttendance Entry Form</h3>
+<form action="/DailyAttendance/Entry" method="post">
+    <div class="mb-3">
+        <label for="AttendanceDate" class="form-label">Attendance Date</label>
+        <input type="date" class="form-control" id="txtAttDate" name="AttendanceDate" placeholder="type Attendance Date in here" required max="@DateTime.Now.ToString("yyyy-MM-dd")">
+    </div>
+
+    <div class="mb-3">
+        <label for="InTime" class="form-label">In Time</label>
+        <input type="time" class="form-control" id="txtInTime" name="InTime" placeholder="type In Time in here" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="OutTime" class="form-label">Out Time</label>
+        <input type="time" class="form-control" id="txtOutTime" name="OutTime" placeholder="type Out Time in here" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="EmployeeId" class="form-label">Employee</label>
+        <select class="form-select" id="txtEmpeId" name="EmployeeId">
+            <option selected>[Select One]</option>
+            @foreach(var employee in Model.EmployeeViewModels)
+            {
+                <option value="@employee.Code">@employee.Name</option>
+            }          
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="DepartmentId" class="form-label">Department</label>
+        <select class="form-select" id="txtDeptId" name="DepartmentId">
+            <option selected>[select one]</option>
+            @foreach(var department in Model.DepartmentViewModels)
+            {
+                <option value="@department.Code">@department.Description</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success" id="btnEntry">Entry</button>
+    <button type="reset" class="btn btn-primary">Cancel</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#btnEntry').attr('disabled', true);
+
+        function toggleEntryButton(){
+            if ($('#txtAttDate').val().length != 0 && $('#txtInTime').val().length != 0 && $('#txtOutTime').val().length != 0) {
+                $('#btnEntry').attr('disabled', false);
+            }
+            else{
+                $('#btnEntry').attr('disabled', true);
+            }
+        }
+
+        $('#txtAttDate,#txtInTime,#txtOutTime').on('change', function () {
+            toggleEntryButton();
+        });
+    });
+
+</script>

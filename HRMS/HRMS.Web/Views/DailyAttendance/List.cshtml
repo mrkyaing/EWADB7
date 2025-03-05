@@ -1,0 +1,54 @@
+﻿@model IList<DailyAttendanceViewModel>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<h1>Daily Attendance List Information</h1>
+
+@if (TempData["Msg"] != null && !Convert.ToBoolean(TempData["IsErrorOccur"]))
+{
+    <div class="alert alert-success" role="alert">
+        <span>@TempData["Msg"]</span>
+    </div>
+}
+else if (TempData["Msg"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <span>@TempData["Msg"]</span>
+    </div>
+}
+
+<table class="table" id="DailyAttTable">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Attendance Date</th>
+            <th scope="col">In Time</th>
+            <th scope="col">Out Time</th>
+            <th scope="col">Employee</th>
+            <th scope="col">Department</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@(Model.IndexOf(item) + 1)</th>
+                <td>@item.AttendanceDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.InTime</td>
+                <td>@item.OutTime</td>
+                <td>@item.EmployeeId</td>
+                <td>@item.DepartmentId</td>
+                <td>
+                    <a href="/DailyAttendance/Edit?id=@item.Id" class="btn btn-success" role="button">Edit</a>
+                    <a href="/DailyAttendance/Delete?id=@item.Id" class="btn btn-danger" role="button" onclick="return confirm('Are you sure to delete this record?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function(){
+        $("#DailyAttTable").DataTable();
+    });
+</script>

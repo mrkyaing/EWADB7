@@ -96,10 +96,12 @@ namespace HRMS.Web.Controllers {
                 TempData["Msg"] = "Data has been updated successfully";
                 TempData["IsErrorOccur"] = false;
             }
-            catch (Exception e) {
-                TempData["Msg"] = "Oh,Sorry error was occured when recrod is updated time.";
+            catch (Exception e)
+            {
+                TempData["Msg"] = "Oh,Sorry error was occured when recrod is deleted time.";
                 TempData["IsErrorOccur"] = true;
             }
+
             return RedirectToAction("List");
         }
     }
