@@ -2,7 +2,7 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-<h3> DailyAttendance Entry Form</h3>
+<h3> Daily Attendance Entry Form</h3>
 <form action="/DailyAttendance/Entry" method="post">
     <div class="mb-3">
         <label for="AttendanceDate" class="form-label">Attendance Date</label>
@@ -25,7 +25,7 @@
             <option selected>[Select One]</option>
             @foreach(var employee in Model.EmployeeViewModels)
             {
-                <option value="@employee.Code">@employee.Name</option>
+                <option value="@employee.Id">@employee.Code</option>
             }          
         </select>
     </div>
@@ -36,7 +36,7 @@
             <option selected>[select one]</option>
             @foreach(var department in Model.DepartmentViewModels)
             {
-                <option value="@department.Code">@department.Description</option>
+                <option value="@department.Id">@department.Code</option>
             }
         </select>
     </div>

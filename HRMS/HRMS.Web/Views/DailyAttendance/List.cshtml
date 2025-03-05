@@ -37,8 +37,8 @@ else if (TempData["Msg"] != null)
                 <td>@item.AttendanceDate.ToString("yyyy-MM-dd")</td>
                 <td>@item.InTime</td>
                 <td>@item.OutTime</td>
-                <td>@item.EmployeeId</td>
-                <td>@item.DepartmentId</td>
+                <td>@item.EmployeeCode</td>
+                <td>@item.DepartmentCode</td>
                 <td>
                     <a href="/DailyAttendance/Edit?id=@item.Id" class="btn btn-success" role="button">Edit</a>
                     <a href="/DailyAttendance/Delete?id=@item.Id" class="btn btn-danger" role="button" onclick="return confirm('Are you sure to delete this record?')">Delete</a>

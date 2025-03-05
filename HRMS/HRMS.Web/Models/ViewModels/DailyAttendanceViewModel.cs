@@ -8,6 +8,8 @@
         public TimeSpan OutTime { get; set; }
         public string EmployeeId { get; set; }
         public string DepartmentId { get; set; }
+        public string EmployeeCode { get; set; }
+        public string DepartmentCode { get; set; }
         public IList<EmployeeViewModel> EmployeeViewModels { get; set; }
         public IList<DepartmentViewModel> DepartmentViewModels { get; set; }
     }

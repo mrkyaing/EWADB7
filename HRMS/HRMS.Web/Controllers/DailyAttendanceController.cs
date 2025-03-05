@@ -15,15 +15,15 @@ namespace HRMS.Web.Controllers
             this._db = db;
         }
         public IActionResult List()
-        {
+        {           
             IList<DailyAttendanceViewModel> DailyAttVM = _db.DailyAttendance.Where(w => w.IsActive).Select(s => new DailyAttendanceViewModel
             {
                 Id = s.Id,
                 AttendanceDate =s.AttendanceDate,
                 InTime=s.InTime,
                 OutTime=s.OutTime,
-                EmployeeId=s.EmployeeId,
-                DepartmentId=s.DepartmentId
+                EmployeeCode= _db.Employees.Where(w=>w.IsActive && w.Id == s.EmployeeId).Select(s=>s.Code).FirstOrDefault().ToString() ,
+                DepartmentCode= _db.Departments.Where(w => w.IsActive && w.Id == s.DepartmentId).Select(s => s.Code).FirstOrDefault().ToString()
             }).ToList();
             return View(DailyAttVM);
         }
