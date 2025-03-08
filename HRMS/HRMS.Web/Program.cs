@@ -1,4 +1,6 @@
 using HRMS.Web.DAO;
+using HRMS.Web.Services;
+using HRMS.Web.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +10,10 @@ builder.Services.AddControllersWithViews();
 var config = builder.Configuration;
 //register the DbContext to connect to the database
 builder.Services.AddDbContext<HRMSWebDbContext>(o => o.UseSqlServer(config.GetConnectionString("HRMSDB")));
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//depedency injection for all of domains
+builder.Services.AddTransient<IPositionService, PositionService>();
+//builder.Services.AddTransient<ID, PositionService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {

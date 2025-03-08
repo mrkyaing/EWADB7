@@ -1,4 +1,6 @@
-﻿<h1>Employee List Information</h1>
+﻿@model IList<EmployeeViewModel>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<h1>Employee List Information</h1>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 @if (TempData["Msg"] != null && !Convert.ToBoolean(TempData["IsErrorOccur"]))
 {
@@ -12,3 +14,46 @@ else if (TempData["Msg"] != null)
         <span>@TempData["Msg"]</span>
     </div>
 }
+<table class="table" id="EmployeeTable">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Code</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">DOB</th>
+            <th scope="col">DOE</th>
+            <th scope="col">DOR</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Department</th>
+            <th scope="col">Position</th>
+            <th scope="col">Address</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@(Model.IndexOf(item) + 1)</th>
+                <td>@item.Code</td>
+                <td>@item.Name</td>
+                <td>@item.DOB</td>
+                 <td>@item.DOE</td>
+                <td>@item.DOR</td>
+                <td>@item.Phone</td>
+                <td>@item.DepartmentInfo</td>
+                <td>@item.PositionInfo</td>
+                <td>@item.Address</td>
+                <td>
+                    <a href="/employee/edit?id=@item.Id" class="btn btn-success" role="button">Edit</a>
+                    <a href="/employee/delete?id=@item.Id" class="btn btn-danger" role="button" onclick="return confirm('Are you sure to delete this record?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $('#EmployeeTable').DataTable();
+    });
+</script>
