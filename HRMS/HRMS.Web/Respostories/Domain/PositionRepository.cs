@@ -8,5 +8,6 @@ namespace HRMS.Web.Respostories.Domain {
         public PositionRepository(HRMSWebDbContext dbContext) : base(dbContext) {
             this._dbContext = dbContext;
         }
+        ///coding specific imple 
     }
 }
