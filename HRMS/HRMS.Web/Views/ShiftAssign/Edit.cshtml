@@ -1,0 +1,96 @@
+﻿@model ShiftAssignViewModel
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<h3> Shift Assign Edit Form</h3>
+<form action="/ShiftAssign/Update" method="post">
+
+    <div class="mb-3">
+
+        <input type="hidden" name="Id" value="@Model.Id">   <!--for update process-->
+
+
+        <label for="EmployeeId" class="form-label">Employee</label>
+        <select class="form-select" id="txtEmpeId" name="EmployeeId">
+            <option value='x' selected>[Select One]</option>
+            @foreach (var employee in Model.EmployeeViewModels)
+            {
+                <option value="@employee.Id">@employee.Code</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="ShiftId" class="form-label">Shift</label>
+        <input type="text" class="form-control" name="ShiftId" id="txtShiftId" placeholder="type ShiftId in here" required value="@Model.ShiftId">
+    </div>
+
+    @*     <div class="mb-3">
+        <label for="ShiftId" class="form-label">Shift</label>
+        <select class="form-select" id="txtDeptId" name="ShiftId">
+            <option value ='x' selected>[select one]</option>
+            @foreach (var shift in Model.ShiftViewModels)
+            {
+                <option value="@shift.Id">@shift.Code</option>
+            }
+        </select>
+    </div> *@
+
+    <div class="mb-3">
+        <label for="DepartmentId" class="form-label">Department</label>
+        <select class="form-select" id="txtDeptId" name="DepartmentId">
+            <option value='x' selected>[select one]</option>
+            @foreach (var department in Model.DepartmentViewModels)
+            {
+                <option value="@department.Id">@department.Code</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="FromDate" class="form-label">From Date</label>
+        <input type="date" class="form-control" id="txtFromDate" name="FromDate" placeholder="type From Date in here" required value="@Model.FromDate.ToString("yyyy-MM-dd")">
+    </div>
+
+    <div class="mb-3">
+        <label for="ToDate" class="form-label">To Date</label>
+        <input type="date" class="form-control" id="txtToDate" name="ToDate" placeholder="type To Date in here" required value="@Model.ToDate.ToString("yyyy-MM-dd")">
+    </div>
+
+    <button type="submit" class="btn btn-success" id="btnEntry">Entry</button>
+    <button type="reset" class="btn btn-primary">Cancel</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+
+        const employeeId = document.getElementById("txtEmpeId");
+        if ("@Model.EmployeeId" != "x") {
+            employeeId.value = "@Model.EmployeeId";
+        } else {
+            employeeId.selectedIndex = 0;
+        }
+
+        const departmentId = document.getElementById("txtDeptId");
+        if ("@Model.DepartmentId" != "x") {
+            departmentId.value = "@Model.DepartmentId";
+        } else {
+            departmentId.selectedIndex = 0;
+        }
+
+        function toggleEntryButton(){
+
+            if ($('#txtEmpeId').val() != 'x' && $('#txtShiftId').val() != 'x' && $('#txtDeptId').val() != 'x') {
+                $('#btnEntry').attr('disabled', false);
+            }
+            else{
+                $('#btnEntry').attr('disabled', true);
+            }
+        }
+
+        $('#txtEmpeId,#txtShiftId,#txtDeptId').on('change', function () {
+            toggleEntryButton();
+        });
+    });
+
+</script>

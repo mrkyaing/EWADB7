@@ -1,0 +1,80 @@
+﻿@model ShiftAssignViewModel
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<h3> Shift Assign Entry Form</h3>
+<form action="/ShiftAssign/Entry" method="post">
+
+    <div class="mb-3">
+        <label for="EmployeeId" class="form-label">Employee</label>
+        <select class="form-select" id="txtEmpeId" name="EmployeeId">
+            <option value='x' selected>[select One]</option>
+            @foreach (var employee in Model.EmployeeViewModels)
+            {
+                <option value="@employee.Id">@employee.Code</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="ShiftId" class="form-label">Shift</label>
+        <input type="text" class="form-control" name="ShiftId" id="txtShiftId" placeholder="type ShiftId in here" required>
+    </div>
+
+@*     <div class="mb-3">
+        <label for="ShiftId" class="form-label">Shift</label>
+        <select class="form-select" id="txtDeptId" name="ShiftId">
+            <option value ='x' selected>[select one]</option>
+            @foreach (var shift in Model.ShiftViewModels)
+            {
+                <option value="@shift.Id">@shift.Code</option>
+            }
+        </select>
+    </div> *@
+
+    <div class="mb-3">
+        <label for="DepartmentId" class="form-label">Department</label>
+        <select class="form-select" id="txtDeptId" name="DepartmentId">
+            <option value='x' selected>[select one]</option>
+            @foreach (var department in Model.DepartmentViewModels)
+            {
+                <option value="@department.Id">@department.Code</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="FromDate" class="form-label">From Date</label>
+        <input type="date" class="form-control" id="txtFromDate" name="FromDate" placeholder="type From Date in here" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="ToDate" class="form-label">To Date</label>
+        <input type="date" class="form-control" id="txtToDate" name="ToDate" placeholder="type To Date in here" required >
+    </div>
+
+    <button type="submit" class="btn btn-success" id="btnEntry">Entry</button>
+    <button type="reset" class="btn btn-primary">Cancel</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+                   
+        $('#btnEntry').attr('disabled', true);
+
+        function toggleEntryButton(){
+
+            if ($('#txtEmpeId').val() != 'x' && $('#txtShiftId').val() != 'x' && $('#txtDeptId').val() != 'x') {
+                $('#btnEntry').attr('disabled', false);
+            }
+            else{
+                $('#btnEntry').attr('disabled', true);
+            }
+        }
+
+        $('#txtEmpeId,#txtShiftId,#txtDeptId').on('change', function () {
+            toggleEntryButton();
+        });
+    });
+
+</script>
