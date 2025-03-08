@@ -10,7 +10,10 @@ namespace HRMS.Web.Services {
         public PositionService(IUnitOfWork unitOfWork) {
             this._unitOfWork = unitOfWork;
         }
-        public async void Create(PositionViewModel viewModel) {
+        private async Task<string> GetIPAsync() {
+            return await NetworkHelper.GetIpAddressAsnyc();
+        }
+        public void Create(PositionViewModel viewModel) {
             try {
                 //DTO >> Data Transfer Object in hre ( from View Models to Data Model)
                 PositionEntity positionEntity = new PositionEntity() {
@@ -21,7 +24,7 @@ namespace HRMS.Web.Services {
                     CreatedAt = DateTime.Now,
                     CreatedBy = "system",
                     IsActive = true,
-                    Ip = await NetworkHelper.GetIpAddressAsnyc()
+                    Ip = GetIPAsync().Result
                 };
                 _unitOfWork.PositoryRepository.Create(positionEntity);
                 _unitOfWork.Commit();
@@ -63,7 +66,7 @@ namespace HRMS.Web.Services {
             }).FirstOrDefault();
         }
 
-        public async void Update(PositionViewModel positionVM) {
+        public void Update(PositionViewModel positionVM) {
             try {
                 //DTO >> Data Transfer Object in hre ( from View Models to Data Model)
                 PositionEntity existingPositionEntity = _unitOfWork.PositoryRepository.GetAll(w => w.IsActive && w.Id == positionVM.Id).FirstOrDefault();
@@ -72,7 +75,7 @@ namespace HRMS.Web.Services {
                     existingPositionEntity.Level = positionVM.Level;
                     existingPositionEntity.UpdatedAt = DateTime.Now;
                     existingPositionEntity.UpdatedBy = "system";
-                    existingPositionEntity.Ip = await NetworkHelper.GetIpAddressAsnyc();
+                    existingPositionEntity.Ip = GetIPAsync().Result;
                     _unitOfWork.PositoryRepository.Update(existingPositionEntity);
                     _unitOfWork.Commit();
                 }
