@@ -1,6 +1,7 @@
 using HRMS.Web.DAO;
 using HRMS.Web.Services;
 using HRMS.Web.UnitOfWorks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.AddControllersWithViews();
 var config = builder.Configuration;
 //register the DbContext to connect to the database
 builder.Services.AddDbContext<HRMSWebDbContext>(o => o.UseSqlServer(config.GetConnectionString("HRMSDB")));
+builder.Services.AddRazorPages();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<HRMSWebDbContext>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 //depedency injection for all of domains
 builder.Services.AddTransient<IPositionService, PositionService>();
@@ -24,6 +27,8 @@ if (!app.Environment.IsDevelopment()) {
 app.UseHttpsRedirection();
 app.UseStaticFiles();// to access all file under wwwroot folder 
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapRazorPages();
 app.Run();

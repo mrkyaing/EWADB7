@@ -1,0 +1,8 @@
+﻿@if (User.IsInRole("HR"))
+{
+    Layout = "/Views/Shared/_LayoutHR.cshtml";
+}
+else
+{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
