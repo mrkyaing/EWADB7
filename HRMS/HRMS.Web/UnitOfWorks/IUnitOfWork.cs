@@ -7,5 +7,6 @@ namespace HRMS.Web.UnitOfWorks {
 
         IPositoryRepository PositoryRepository { get; }
         IDepartmentRepository DepartmentRepository { get; }
+        IEmployeeRepository EmployeeRepository { get; }
     }
 }

@@ -17,18 +17,12 @@ namespace HRMS.Web.UnitOfWorks {
         }
 
         private IDepartmentRepository departmentRepository;
-        public IDepartmentRepository DepartmentRepository {
-            get {
-                return departmentRepository = departmentRepository ?? new DepartmentRepository(_dbContext);
-            }
-        }
+        public IDepartmentRepository DepartmentRepository => departmentRepository = departmentRepository ?? new DepartmentRepository(_dbContext);
 
-        public void Commit() {
-            _dbContext.SaveChanges();
-        }
+        private IEmployeeRepository employeeRepository;
+        public IEmployeeRepository EmployeeRepository => employeeRepository ?? new EmployeeRepository(_dbContext);
 
-        public void Rollback() {
-            _dbContext.Dispose();
-        }
+        public void Commit() => _dbContext.SaveChanges();
+        public void Rollback() => _dbContext.Dispose();
     }
 }

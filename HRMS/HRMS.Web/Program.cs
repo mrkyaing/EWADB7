@@ -16,6 +16,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkSto
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 //depedency injection for all of domains
 builder.Services.AddTransient<IPositionService, PositionService>();
+builder.Services.AddTransient<IUserService, UserServie>();
 //builder.Services.AddTransient<ID, PositionService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
@@ -29,6 +30,11 @@ app.UseStaticFiles();// to access all file under wwwroot folder
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseStatusCodePages(async ctx => {
+    if (ctx.HttpContext.Response.StatusCode == 403 || ctx.HttpContext.Response.StatusCode == 404) {
+        ctx.HttpContext.Response.Redirect("/Home/AccessDenied");//your route that u defined in home controller
+    }
+});
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 app.Run();

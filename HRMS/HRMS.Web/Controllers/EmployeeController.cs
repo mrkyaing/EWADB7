@@ -1,6 +1,7 @@
 ﻿using HRMS.Web.DAO;
 using HRMS.Web.Models.DataModels;
 using HRMS.Web.Models.ViewModels;
+using HRMS.Web.Services;
 using HRMS.Web.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,8 +9,11 @@ namespace HRMS.Web.Controllers {
     public class EmployeeController : Controller {
 
         private readonly HRMSWebDbContext _db;
-        public EmployeeController(HRMSWebDbContext db) {
+        private readonly IUserService _userService;
+
+        public EmployeeController(HRMSWebDbContext db, IUserService userService) {
             this._db = db;
+            this._userService = userService;
         }
 
         public IActionResult List() {
@@ -44,6 +48,12 @@ namespace HRMS.Web.Controllers {
         [HttpPost]
         public async Task<IActionResult> Entry(EmployeeViewModel employeeViewModel) {
             try {
+                string userId = await _userService.CreateUserWithRole(employeeViewModel.Email, employeeViewModel.Email);
+                if (userId.Equals("unknown")) {
+                    TempData["Msg"] = "We face the error when pre-create the user recrod.";
+                    TempData["IsErrorOccur"] = true;
+                    return View();
+                }
                 //DTO Processs from View Model to Data Model for save process
                 EmployeeEntity employeeEntity = new EmployeeEntity() {
                     Id = Guid.NewGuid().ToString(),
@@ -62,6 +72,7 @@ namespace HRMS.Web.Controllers {
                     IsActive = true,
                     CreatedAt = DateTime.Now,
                     CreatedBy = "system",
+                    UserId = userId,
                     Ip = await NetworkHelper.GetIpAddressAsnyc()
                 };
                 _db.Employees.Add(employeeEntity);

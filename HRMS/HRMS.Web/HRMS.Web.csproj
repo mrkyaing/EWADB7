@@ -8,6 +8,7 @@
 
   <ItemGroup>
    <!--Library for EF Core -->
+    <PackageReference Include="EPPlus" Version="7.6.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />

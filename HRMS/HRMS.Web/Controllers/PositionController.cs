@@ -1,5 +1,6 @@
 ﻿using HRMS.Web.Models.ViewModels;
 using HRMS.Web.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HRMS.Web.Controllers {
@@ -13,10 +14,12 @@ namespace HRMS.Web.Controllers {
         }
 
         [HttpGet]
+        [Authorize(Roles = "HR")]
         public IActionResult Entry() {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "HR")]
         public async Task<IActionResult> Entry(PositionViewModel positionVM) {
             try {
                 _positionService.Create(positionVM);
@@ -33,6 +36,7 @@ namespace HRMS.Web.Controllers {
         public IActionResult List() => View(_positionService.GetAll().ToList());
 
         //postion/delete?Id=1
+        [Authorize(Roles = "HR")]
         public IActionResult Delete(string Id) {
             try {
                 _positionService.Delete(Id);
@@ -48,6 +52,7 @@ namespace HRMS.Web.Controllers {
         public IActionResult Edit(string Id) => View(_positionService.GetById(Id));
 
         [HttpPost]
+        [Authorize(Roles = "HR")]
         public async Task<IActionResult> Update(PositionViewModel positionVM) {
             try {
                 _positionService.Update(positionVM);
