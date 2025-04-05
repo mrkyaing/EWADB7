@@ -14,17 +14,21 @@ namespace HRMS.Web.Services {
                                                                           on e.PositionId equals p.Id
                                                                           join d in _unitOfWork.DepartmentRepository.GetAll(w => w.IsActive)
                                                                           on e.DepartmentId equals d.Id
+                                                                          where e.Code.CompareTo(fromCode) >= 0 && e.Code.CompareTo(toCode) <= 0
                                                                           select new EmployeeDetailReportViewModel {
                                                                               Code = e.Code,
                                                                               Name = e.Name,
-                                                                              DOB = e.DOB,
-                                                                              DOR = e.DOR.Value,
-                                                                              DOE = e.DOE,
+                                                                              DOB = e.DOB.ToString("yyyy-MM-dd"),
+                                                                              BasicSalary = e.BasicSalary,
+                                                                              Gender = e.Gender,
+                                                                              Email = e.Email,
+                                                                              DOR = e.DOR.HasValue ? e.DOR.Value.ToString("yyyy-MM-dd") : null,
+                                                                              DOE = e.DOE.ToString("yyyy-MM-dd"),
                                                                               Address = e.Address,
                                                                               Phone = e.Phone,
                                                                               DepartmentInfo = d.Code + "/" + d.Description,
                                                                               PositionInfo = p.Code + "/" + p.Description
-                                                                          });
+                                                                          }).AsEnumerable();
             return employeeDetails;
         }
 

@@ -10,10 +10,12 @@ namespace HRMS.Web.Controllers {
 
         private readonly HRMSWebDbContext _db;
         private readonly IUserService _userService;
+        private readonly IEmployeeService _employeeService;
 
-        public EmployeeController(HRMSWebDbContext db, IUserService userService) {
+        public EmployeeController(HRMSWebDbContext db, IUserService userService, IEmployeeService employeeService) {
             this._db = db;
             this._userService = userService;
+            this._employeeService = employeeService;
         }
 
         public IActionResult List() {
@@ -153,6 +155,23 @@ namespace HRMS.Web.Controllers {
             return RedirectToAction("List");
         }
 
+        public IActionResult EmployeeDetailReport() => View();
+
+        [HttpPost]
+        public IActionResult EmployeeDetailReport(string fromCode, string toCode) {
+            string fileName = $"EmployeeDetail-{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}.xlsx";
+            string fileContextType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            List<EmployeeDetailReportViewModel> reportData = _employeeService.GetByCode(fromCode, toCode).ToList();
+            if (reportData.Count > 0) {
+                var fileOutput = ReportHelper.ExportToExcel(reportData, fileName);
+                ViewBag.Msg = "Employee detail report is successfully exported.";
+                return File(fileOutput, fileContextType, fileName);
+            }
+            else {
+                ViewBag.Msg = "There is no data to export employee detail report.";
+            }
+            return View();
+        }
         private IList<DepartmentViewModel> GetAllDepartments() {
             return _db.Departments.Where(w => w.IsActive).Select(s => new DepartmentViewModel {
                 Id = s.Id,
@@ -160,7 +179,6 @@ namespace HRMS.Web.Controllers {
                 Description = s.Description
             }).ToList();
         }
-
         private IList<PositionViewModel> GetAllPositions() {
             return _db.Positions.Where(w => w.IsActive).Select(s => new PositionViewModel {
                 Id = s.Id,

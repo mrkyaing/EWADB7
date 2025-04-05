@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.Web", "HRMS.Web\HRMS.Web.csproj", "{81D15489-D832-4316-9EA5-B1EB4C8D9589}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.UnitTests", "HRMS.UnitTests\HRMS.UnitTests.csproj", "{DF323E01-A2FF-49B7-A6FE-957CFA9B3977}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{81D15489-D832-4316-9EA5-B1EB4C8D9589}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81D15489-D832-4316-9EA5-B1EB4C8D9589}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81D15489-D832-4316-9EA5-B1EB4C8D9589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF323E01-A2FF-49B7-A6FE-957CFA9B3977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF323E01-A2FF-49B7-A6FE-957CFA9B3977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF323E01-A2FF-49B7-A6FE-957CFA9B3977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF323E01-A2FF-49B7-A6FE-957CFA9B3977}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

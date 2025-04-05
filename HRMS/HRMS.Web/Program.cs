@@ -17,6 +17,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 //depedency injection for all of domains
 builder.Services.AddTransient<IPositionService, PositionService>();
 builder.Services.AddTransient<IUserService, UserServie>();
+builder.Services.AddTransient<IEmployeeService, EmployeeService>();
 //builder.Services.AddTransient<ID, PositionService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
