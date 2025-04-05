@@ -1,13 +1,14 @@
-﻿using HRMS.Web.Models.ViewModels;
+﻿using HRMS.Web.Models.DataModels;
+using HRMS.Web.Models.ViewModels;
 
 namespace HRMS.Web.Services {
     public interface IPositionService {
         //crud process
-        void Create(PositionViewModel viewModel);
+        PositionEntity Create(PositionViewModel viewModel);
         IEnumerable<PositionViewModel> GetAll();
         PositionViewModel GetById(string id);
-        void Update(PositionViewModel viewModel);
-        void Delete(string Id);
+        PositionEntity Update(PositionViewModel viewModel);
+        bool Delete(string Id);
 
         //new implemenation in here 
         ///see more .....................................................

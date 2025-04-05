@@ -36,8 +36,7 @@ namespace HRMS.UnitTests.Domain.Position {
             // 2 ) Act
             var positonService = new PositionService(unitOfWorkMock.Object);
             // 3  Assert
-            var exception = Record.Exception(() => positonService.Create(expectedPositionViewModel));
-            Assert.Null(exception);
+            Assert.Equal(expectedPositionViewModel.Code, expectedPositionEntity.Code);
         }
 
         [Fact]

@@ -13,7 +13,7 @@ namespace HRMS.Web.Services {
         private async Task<string> GetIPAsync() {
             return await NetworkHelper.GetIpAddressAsnyc();
         }
-        public void Create(PositionViewModel viewModel) {
+        public PositionEntity Create(PositionViewModel viewModel) {
             try {
                 //DTO >> Data Transfer Object in hre ( from View Models to Data Model)
                 PositionEntity positionEntity = new PositionEntity() {
@@ -28,13 +28,15 @@ namespace HRMS.Web.Services {
                 };
                 _unitOfWork.PositoryRepository.Create(positionEntity);
                 _unitOfWork.Commit();
+                return positionEntity;
             }
             catch (Exception e) {
                 _unitOfWork.Rollback();
+                throw e;
             }
         }
 
-        public void Delete(string Id) {
+        public bool Delete(string Id) {
             try {
                 PositionEntity positionEntity = _unitOfWork.PositoryRepository.GetAll(w => w.Id == Id).FirstOrDefault();
                 if (positionEntity is not null) {
@@ -45,7 +47,9 @@ namespace HRMS.Web.Services {
             }
             catch (Exception e) {
                 _unitOfWork.Rollback();
+                return false;
             }
+            return true;
         }
 
         public IEnumerable<PositionViewModel> GetAll() {
@@ -66,7 +70,7 @@ namespace HRMS.Web.Services {
             }).FirstOrDefault();
         }
 
-        public void Update(PositionViewModel positionVM) {
+        public PositionEntity Update(PositionViewModel positionVM) {
             try {
                 //DTO >> Data Transfer Object in hre ( from View Models to Data Model)
                 PositionEntity existingPositionEntity = _unitOfWork.PositoryRepository.GetAll(w => w.IsActive && w.Id == positionVM.Id).FirstOrDefault();
@@ -79,9 +83,11 @@ namespace HRMS.Web.Services {
                     _unitOfWork.PositoryRepository.Update(existingPositionEntity);
                     _unitOfWork.Commit();
                 }
+                return existingPositionEntity;
             }
             catch (Exception e) {
                 _unitOfWork.Rollback();
+                throw e;
             }
         }
 
