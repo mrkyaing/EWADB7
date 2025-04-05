@@ -63,7 +63,7 @@ namespace HRMS.UnitTests.Domain.Position {
                     CreatedAt = DateTime.Now,
                     CreatedBy = "system",
                     Ip = "127.0.0.1",
-                    IsActive = true
+                    IsActive = false
                 },
                  new PositionEntity {
                     Id= Guid.NewGuid().ToString(),
